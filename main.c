@@ -1,37 +1,28 @@
 #include <stdio.h>
 #include <stdlib.h>
-#define MAX_INDICE 7
+#define MAX_INDICE 15
 
 int i,z,aux,num_changes_quicksort=0,index_vt;
 
 int main(int argc, char *argv[])
 {
-  index_vt = rand()%MAX_INDICE+1;
-  int vector1[index_vt],vector2[index_vt],vector3[index_vt],choise=1;
+  int choise=1;
+
   while(choise != 0){
-      for(i=0;i<index_vt; i++){
-         vector1[i] = rand()%100;
-         vector2[i] = rand()%100;
-         vector3[i] = rand()%100;
-         while(check(vector1,i)){
-            vector1[i] = rand()%100;
-         }
-         while(check(vector2,i)){
-            vector2[i] = rand()%100;
-         }
-         while(check(vector3,i)){
-            vector3[i] = rand()%100;
-         }
-      }
+      index_vt = rand()%MAX_INDICE+1;
+      int vector1[index_vt], vector2[index_vt], vector3[index_vt];
+      InsertRandomtValues(vector1);
+      InsertRandomtValues(vector2);
+      InsertRandomtValues(vector3);
 
       printf("*******/ SORTER OF NUMBERS \\********\n\n");
-      printVectorInitial(vector1);
-      printVectorInitial(vector2);
-      printVectorInitial(vector3);
+      printVectorInitial(vector1, 1);
+      printVectorInitial(vector2, 2);
+      printVectorInitial(vector3, 3);
 
       bubbleSortMethod(vector1);
       SelectionSortMethod(vector2);
-      QuickSortMethod(vector3,0,index_vt);
+      QuickSortMethod(vector3, 0, index_vt);
 
       char method_name[25] = "Quick Sort";
       printVector(vector3, num_changes_quicksort, &method_name);
@@ -45,6 +36,14 @@ int main(int argc, char *argv[])
   return 0;
 }
 
+void InsertRandomtValues(int * vector){
+    for(i=0;i<index_vt; i++){
+      do{
+        vector[i] = rand()%100;
+      }while(check(vector,i));
+    }
+}
+
 int check(int * vector, int index){
         for(z=0;z<index;z++){
             if(vector[z]==vector[index]){
@@ -54,8 +53,8 @@ int check(int * vector, int index){
         return 0;
   }
 
-void printVectorInitial(int * vector){
-  printf("\nInitial vector: ");
+void printVectorInitial(int * vector, int num_vector){
+  printf("\nInitial vector %d: ",num_vector);
   for(i=0;i<index_vt; i++){
        printf("%d",vector[i]);
        if(i < (index_vt-1)){
@@ -140,4 +139,3 @@ void printVector(int * vector, int num_chages, char * method_name){
      }
      printf("\n");
 }
-
