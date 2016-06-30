@@ -7,5 +7,4 @@ An aplication in C to sort numbers using many types of methods.
 * Bubble Sort
 * Selection Sort
 * Quck Sort
-* Comb sort
-* Heapsort
+
